@@ -1,0 +1,48 @@
+/opt/st/stm32cubeide_1.4.0/plugins/com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.7-2018-q2-update.linux64_1.4.0.202007081208/tools/bin
+/opt/st/stm32cubeide_1.4.0/plugins/com.st.stm32cube.ide.mcu.externaltools.make.linux64_1.4.0.202007081208/tools/bin
+//home/me/.local/bin
+/usr/local/sbin
+/usr/local/bin
+/usr/sbin:/usr/bin
+/sbin
+/bin
+/usr/games
+/usr/local/games
+/snap/bin
+
+. ./setenv.sh
+./arm-none-eabi-gcc -c main.c
+./arm-none-eabi-ld -o main -T STM32F103RBTX_FLASH.ld main.o
+./arm-none-eabi-objdump -h main
+
+main:     file format elf32-littlearm
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .isr_vector   00000000  08000000  08000000  00020004  2**0
+                  CONTENTS
+  1 .text         000000e0  08000000  08000000  00010000  2**2
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .rodata       00000000  080000e0  080000e0  00020004  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  3 .ARM.extab    00000000  080000e0  080000e0  00020004  2**0
+                  CONTENTS
+  4 .ARM          00000000  080000e0  080000e0  00020004  2**0
+                  CONTENTS
+  5 .preinit_array 00000000  080000e0  080000e0  00020004  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  6 .init_array   00000000  080000e0  080000e0  00020004  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .fini_array   00000000  080000e0  080000e0  00020004  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  8 .data         00000004  20000000  080000e0  00020000  2**2
+                  CONTENTS, ALLOC, LOAD, DATA
+  9 .bss          00000084  20000004  080000e4  00020004  2**2
+                  ALLOC
+ 10 ._user_heap_stack 00000600  20000088  080000e4  00020088  2**0
+                  ALLOC
+ 11 .ARM.attributes 00000030  00000000  00000000  00020004  2**0
+                  CONTENTS, READONLY
+ 12 .comment      0000007b  00000000  00000000  00020034  2**0
+                  CONTENTS, READONLY
+
