@@ -8,7 +8,7 @@ Makefile has not been simplified and refactored yet.<br/>
 
 Install STM32CubeIDE. PATH and CC variables of setenv.sh must be modified according to the local cross compiler settings of STM32CubeIDE. Install gdb, st-link and openocd too
 
-<pre><code>$ sudo apt-get install st-stm32cubeide-1.4.0 gdb openocd 
+<pre><code>$ sudo apt-get install st-stm32cubeide-1.4.0 gdb openocd st-stlink-server st-stlink-udev-rules
 </code></pre>
 
 
