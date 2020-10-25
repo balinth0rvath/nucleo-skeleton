@@ -22,7 +22,7 @@ Executables are generated to build folder:
 
 
 ## Debug
-Two tabs needed, one for openocd and a second for gdb<br>
+Two tabs needed, one for openocd and a second for gdb. openocd connects to gdb via localhost:1234<br>
 Tab1
 <pre><code>$ openocd
 </code></pre>
