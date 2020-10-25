@@ -1,2 +1,2 @@
 #!/bin/bash
-arm-none-eabi-gdb ${BUILD_DIR}BlinkLed.elf
+${GDB} ${BUILD_DIR}${PROJECT_NAME}.elf
