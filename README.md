@@ -2,7 +2,7 @@
 
 Board: Nucleo-64 STM32F103RB<br/><br/>
 A simple makefile based project created from generated sources of an STM32CubeIDE project.<br/>
-Makefile has not been simplified and refactored yet.<br/>
+Makefile has not been simplified and refactored yet. This is not a clean project, used for experimental purposes<br/>
 
 ## Toolchain setup on Ubuntu
 
@@ -20,6 +20,9 @@ Executables are generated to build folder:
 <pre><code>$ make all
 </code></pre>
 
+## Flash
+<pre><code>$ st-flash write BlinkLed.bin 0x08000000
+</code></pre>
 
 ## Debug
 Two tabs needed, one for openocd and a second for gdb. openocd connects to gdb via localhost:1234<br>
