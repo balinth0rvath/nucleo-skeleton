@@ -4,7 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 S_SRCS += \
-../Core/Startup/startup_stm32f103rbtx.s 
+./Core/Startup/startup_stm32f103rbtx.s 
 
 OBJS += \
 ./$(BUILD_DIR)Core/Startup/startup_stm32f103rbtx.o 
@@ -14,6 +14,6 @@ S_DEPS += \
 
 
 # Each subdirectory must supply rules for building sources it contributes
-$(BUILD_DIR)Core/Startup/startup_stm32f103rbtx.o: ../Core/Startup/startup_stm32f103rbtx.s
+$(BUILD_DIR)Core/Startup/startup_stm32f103rbtx.o: ./Core/Startup/startup_stm32f103rbtx.s
 	arm-none-eabi-gcc -mcpu=cortex-m3 -g3 -c -x assembler-with-cpp -MMD -MP -MF"$(BUILD_DIR)Core/Startup/startup_stm32f103rbtx.d" -MT"$@" --specs=nano.specs -mfloat-abi=soft -mthumb -o "$@" "$<"
 
