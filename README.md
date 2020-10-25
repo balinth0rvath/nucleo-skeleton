@@ -14,10 +14,11 @@ Install STM32CubeIDE. PATH and CC variables of setenv.sh must be modified accord
 
 ## Build
 Executables are generated to build folder:
-<pre><code>$ make clean
-</code></pre>
 
-<pre><code>$ make all
+<pre><code>
+$ . ./setenv.sh
+$ make clean
+$ make all
 </code></pre>
 
 ## Flash
