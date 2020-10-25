@@ -5,9 +5,9 @@ A simple makefile based project created from generated sources of an STM32CubeID
 
 ## Toolchain setup on Ubuntu
 
-Install STM32CubeIDE. PATH and CC variables of setenv.sh must be modified according to the local cross compiler settings of STM32CubeIDE. Install gdb, st-link and openocd too
+Install STM32CubeIDE. Environment variables in setenv.sh must be modified according to the local cross compiler settings of STM32CubeIDE. Install gdb, st-link and openocd too
 
-<pre><code>$ sudo apt-get install st-stm32cubeide-1.4.0 gdb openocd st-stlink-server st-stlink-udev-rules
+<pre><code>$ sudo apt-get install build-essential st-stm32cubeide-1.4.0 gdb openocd st-stlink-server st-stlink-udev-rules
 </code></pre>
 
 
@@ -16,7 +16,6 @@ Executables are generated to build folder:
 
 <pre><code>
 $ . ./setenv.sh
-$ make clean
 $ make all
 </code></pre>
 
