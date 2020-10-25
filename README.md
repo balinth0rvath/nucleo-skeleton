@@ -21,7 +21,7 @@ $ make all
 </code></pre>
 
 ## Flash
-<pre><code>$ st-flash write build/BlinkLed.bin 0x08000000
+<pre><code>$ st-flash write build/nucleo-skeleton.bin 0x08000000
 </code></pre>
 
 ## Debug
