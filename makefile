@@ -1,20 +1,13 @@
-################################################################################
-# Automatically-generated file. Do not edit!
-################################################################################
-
 RM := rm -rf
 MKDIR_P = mkdir -p
 LD = ./STM32F103RBTX_FLASH.ld
-# All of the sources participating in the build are defined here
--include sources.mk
--include subdir_drivers.mk
--include subdir_startup.mk
--include subdir_core.mk
--include objects.mk
-
-# Add inputs and outputs from these tool invocations to the build variables 
 EXECUTABLES += \
 BlinkLed.elf \
+
+SUBDIRS := \
+$(BUILD_DIR)Core/Src \
+$(BUILD_DIR)Core/Startup \
+$(BUILD_DIR)Drivers/STM32F1xx_HAL_Driver/Src \
 
 EXECUTABLES_WITH_PATH += \
 $(BUILD_DIR)BlinkLed.elf \
@@ -50,10 +43,41 @@ $(BUILD_DIR)Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o \
 $(BUILD_DIR)Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
 
 # All Target
-all: directories BlinkLed.elf secondary-outputs
+all: directories coremodules startup BlinkLed.elf secondary-outputs
 
 directories:
 	${MKDIR_P} ${SUBDIRS}
+
+OBJ_CORE = Core/Src/system_stm32f1xx.o \
+Core/Src/sysmem.o \
+Core/Src/syscalls.o \
+Core/Src/stm32f1xx_it.o \
+Core/Src/main.o \
+Core/Src/stm32f1xx_hal_msp.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_dma.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash_ex.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio_ex.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_pwr.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc_ex.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim.o \
+Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_tim_ex.o
+
+OBJ_STARTUP += \
+Core/Startup/startup_stm32f103rbtx.o 
+
+startup: $(OBJ_STARTUP)
+%.o: %.s
+	arm-none-eabi-gcc -mcpu=cortex-m3 -g3 -c -x assembler-with-cpp --specs=nano.specs -mfloat-abi=soft -mthumb -o "./$(BUILD_DIR)$@" "$<"
+
+coremodules: $(OBJ_CORE)
+%.o: %.c
+	arm-none-eabi-gcc $< -mcpu=cortex-m3 -std=gnu11 -g3 -DUSE_HAL_DRIVER -DSTM32F103xB -DDEBUG -c -ICore/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc -IDrivers/STM32F1xx_HAL_Driver/Inc/Legacy -IDrivers/CMSIS/Device/ST/STM32F1xx/Include -IDrivers/CMSIS/Include -O0 -ffunction-sections -fdata-sections -Wall -fstack-usage --specs=nano.specs -mfloat-abi=soft -mthumb -o "./$(BUILD_DIR)$@"
 
 # Tool invocations
 BlinkLed.elf: $(OBJS) $(USER_OBJS) $(LD)
