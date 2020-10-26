@@ -29,7 +29,9 @@ Tab1
 <pre><code>$ openocd
 </code></pre>
 Tab2
-<pre><code>$ ./gdb-target.sh
+<pre><code>
+$ . ./setenv.sh
+$ ./gdb-target.sh
 (gdb) tar rem :1234
 </code></pre>
 
