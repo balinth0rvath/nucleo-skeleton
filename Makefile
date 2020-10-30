@@ -23,8 +23,8 @@ $(BUILD_DIR)Drivers/STM32F1xx_HAL_Driver/Src \
 #$(BUILD_DIR)Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_exti.o 
 #$(BUILD_DIR)Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_flash.o 
 #$(BUILD_DIR)Core/Src/stm32f1xx_hal_msp.o 
-#$(BUILD_DIR)Core/Src/stm32f1xx_it.o 
 OBJ_CORE = \
+$(BUILD_DIR)Core/Src/stm32f1xx_it.o \
 $(BUILD_DIR)Core/Src/system_stm32f1xx.o \
 $(BUILD_DIR)Core/Src/main.o \
 $(BUILD_DIR)Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o \
