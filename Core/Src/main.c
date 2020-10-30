@@ -69,9 +69,53 @@ int main(void)
 
   /* MCU Configuration--------------------------------------------------------*/
 
+
+	// (FLASH->ACR |= FLASH_ACR_PRFTBE)
+  unsigned int volatile * p_reg = NULL;
+  p_reg = (unsigned int *) 0x40022000;
+  *p_reg |= (0x1UL << 4U);
+
+  //PriorityGroup = 3
+  //uint32_t reg_value;
+  //uint32_t PriorityGroupTmp = (PriorityGroup & (uint32_t) 0x07UL); /* only values 0..7 are used          */
+
+  //reg_value = SCB->AIRCR; /* read old register configuration    */
+  //reg_value &= ~((uint32_t) (SCB_AIRCR_VECTKEY_Msk | SCB_AIRCR_PRIGROUP_Msk)); /* clear bits to change               */
+  //reg_value = (reg_value | ((uint32_t) 0x5FAUL << SCB_AIRCR_VECTKEY_Pos)
+  //		| (PriorityGroupTmp << SCB_AIRCR_PRIGROUP_Pos)); /* Insert write key and priority group */
+  //SCB->AIRCR = reg_value;
+
+  uint32_t reg_value;
+
+  p_reg = (unsigned int *) 0xE000ED0C;
+  reg_value = *p_reg;
+  reg_value &= ~((uint32_t) ((0xFFFFUL << 16U) | 7UL << 8U));
+  reg_value = (reg_value | ((uint32_t) 0x5FAUL << 16U)
+    		| (3U << 8U));
+  //if (HAL_SYSTICK_Config(SystemCoreClock / (1000U / uwTickFreq)) > 0U)
+  // SystemCoreClock = 16000000
+  // uwTickFreq = 1U (KHz)
+  // 16000
+  // SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
+  //  NVIC_SetPriority (SysTick_IRQn, (1UL << __NVIC_PRIO_BITS) - 1UL); /* set Priority for Systick Interrupt */
+  //  SysTick->VAL   = 0UL;                                             /* Load the SysTick Counter Value */
+  //  SysTick->CTRL  = SysTick_CTRL_CLKSOURCE_Msk |
+  //                   SysTick_CTRL_TICKINT_Msk   |
+  //                   SysTick_CTRL_ENABLE_Msk;                         /* Enable SysTick IRQ and SysTick Timer */
+
+  // SysTick->LOAD  = (uint32_t)(ticks - 1UL);                         /* set reload register */
+  p_reg = (uint32_t *) 0xE000E014;
+  *p_reg = (uint32_t)(15999UL);
+
+  //NVIC_SetPriority SCB->SHP[(((uint32_t)IRQn) & 0xFUL)-4UL] = (uint8_t)((priority << (8U - __NVIC_PRIO_BITS)) & (uint32_t)0xFFUL);
+  p_reg = (uint32_t *) 0xE000E018;
+
+  uint32_t offset = (((uint32_t)0xFF) & 0xFUL)-4UL;
+  p_reg = p_reg + offset;
+  *p_reg = (uint8_t)((0xF << (8U - 4U)) & (uint32_t)0xFFUL);
+
   /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
   HAL_Init();
-
   /* USER CODE BEGIN Init */
 
   /* USER CODE END Init */
